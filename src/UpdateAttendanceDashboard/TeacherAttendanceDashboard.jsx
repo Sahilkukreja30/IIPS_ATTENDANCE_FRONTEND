@@ -73,8 +73,17 @@ const TeacherAttendanceDashboard = () => {
     fetchAttendances();
   }, [fetchAttendances]);
 
+  const isAttendanceUpdatable = useCallback((attendance) => {
+    if (!attendance) return false;
+    const timeToCheck = attendance.markedAt || attendance.date;
+    if (!timeToCheck) return !!attendance.canUpdate;
+    const diffMs = Date.now() - new Date(timeToCheck).getTime();
+    const SIX_HOURS_MS = 6 * 60 * 60 * 1000; // 6 hours
+    return diffMs <= SIX_HOURS_MS && attendance.canUpdate !== false;
+  }, []);
+
   const handleUpdateClick = (attendance) => {
-    if (!attendance.canUpdate) return;
+    if (!isAttendanceUpdatable(attendance)) return;
     
     navigate('/update_attendance', {
       state: {
@@ -202,15 +211,20 @@ const TeacherAttendanceDashboard = () => {
                     </div>
                   </div>
 
-                  <button
-                    onClick={() => handleUpdateClick(attendance)}
-                    disabled={!attendance.canUpdate}
-                    className={`update-button ${attendance.canUpdate ? 'active' : 'disabled'}`}
-                    aria-label={attendance.canUpdate ? 'Update attendance' : 'Update period expired'}
-                  >
-                    <Edit />
-                    {attendance.canUpdate ? 'Update Attendance' : 'Update Expired'}
-                  </button>
+                  {(() => {
+                    const canUpdate = isAttendanceUpdatable(attendance);
+                    return (
+                      <button
+                        onClick={() => canUpdate && handleUpdateClick(attendance)}
+                        disabled={!canUpdate}
+                        className={`update-button ${canUpdate ? 'active' : 'disabled'}`}
+                        aria-label={canUpdate ? 'Update attendance' : 'Update period expired'}
+                      >
+                        <Edit />
+                        {canUpdate ? 'Update Attendance' : 'Update Expired'}
+                      </button>
+                    );
+                  })()}
                 </div>
               </div>
             ))}
