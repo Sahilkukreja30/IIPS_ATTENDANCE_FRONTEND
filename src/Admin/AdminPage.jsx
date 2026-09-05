@@ -144,9 +144,9 @@ const AdminPage = () => {
       icon: <FaChalkboardTeacher />,
       endpoint: "/teacher/upload-teachers",
       requiredFields: ["name", "email", "password"],
-      optionalFields: [],
+      optionalFields: ["faculty_id"],
       instructions: {
-        description: "Upload teacher information with login credentials.",
+        description: "Upload teacher information with login credentials. If a teacher with the same email already exists, their record will be updated.",
         requiredColumns: [
           { name: "name", description: "Full name of the teacher" },
           {
@@ -158,9 +158,14 @@ const AdminPage = () => {
             description: "Initial password (will be hashed)",
           },
         ],
-        optionalColumns: [],
+        optionalColumns: [
+          {
+            name: "faculty_id",
+            description: "Unique faculty/employee ID assigned to the teacher (e.g., FAC001)",
+          },
+        ],
         example:
-          "name,email,password\nDr. John Smith,john.smith@university.edu,password123",
+          "name,email,password,faculty_id\nDr. John Smith,john.smith@university.edu,password123,FAC001\nDr. Jane Doe,jane.doe@university.edu,pass456,FAC002",
       },
     },
   ];
