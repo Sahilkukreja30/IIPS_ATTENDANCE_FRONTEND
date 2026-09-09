@@ -11,7 +11,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Modal from 'react-modal';
-import './AlertModal.css'; 
+import './AlertModal.css';
 import cross from "../Assets/cross-mark.svg";
 import tick from "../Assets/accept-check-good-mark-ok-tick.svg";
 
@@ -21,7 +21,7 @@ const AlertModal = ({ isOpen, onClose, onConfirm, message, iserror, isConfirm, e
 
   const handleClose = () => {
     if (onConfirm) {
-      if(!emailIsConfirm) onConfirm(); // Trigger the callback for  any action
+      if (!emailIsConfirm) onConfirm(); // Trigger the callback for  any action
     }
     onClose(); // Always close the modal
   };
@@ -53,9 +53,9 @@ const AlertModal = ({ isOpen, onClose, onConfirm, message, iserror, isConfirm, e
             </g>
           </svg>
         ) : (
-          <img 
+          <img
             src={image}
-            alt="Success" 
+            alt="Success"
             className="alert_success-icon"
           />
         )}
@@ -77,8 +77,8 @@ const AlertModal = ({ isOpen, onClose, onConfirm, message, iserror, isConfirm, e
           </>
         ) : (
           <button onClick={handleClose} className={`alert_close-button ${theme}`}>
-          Close
-      </button>
+            Close
+          </button>
         )}
       </div>
     </Modal>

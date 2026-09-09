@@ -160,12 +160,12 @@ const AdminPage = () => {
         ],
         optionalColumns: [
           {
-            name: "faculty_id",
-            description: "Unique faculty/employee ID assigned to the teacher (e.g., FAC001)",
+            name: "faculty_id (or Tid, Teacher_Id)",
+            description: "Unique faculty/teacher ID assigned to the teacher (e.g., 214, FAC001)",
           },
         ],
         example:
-          "name,email,password,faculty_id\nDr. John Smith,john.smith@university.edu,password123,FAC001\nDr. Jane Doe,jane.doe@university.edu,pass456,FAC002",
+          "name,email,password,Tid\nDr. John Smith,john.smith@university.edu,password123,214\nDr. Jane Doe,jane.doe@university.edu,pass456,215",
       },
     },
   ];

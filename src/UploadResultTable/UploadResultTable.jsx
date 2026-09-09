@@ -99,6 +99,9 @@ const UploadResultsTable = ({ uploadResult, category, theme }) => {
                     {category === 'teacher' && (
                       <>
                         {item.email && <div><strong>Email:</strong> {item.email}</div>}
+                        {item.faculty_id && item.faculty_id !== 'N/A' && (
+                          <div><strong>Faculty ID:</strong> {item.faculty_id}</div>
+                        )}
                       </>
                     )}
                   </td>
